@@ -23,14 +23,20 @@ connectDB();
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
+const cors = require("cors");
+
 app.use(cors({
   origin: [
-    'https://manisha-makeover-academy.vercel.app',
-    'http://localhost:5173'
+    "https://manisha-makeover-academy.vercel.app",
+    "https://manishamakeoveracademy.netlify.app",
+    "http://localhost:5173"
   ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors());
 
 app.options('*', cors());
 // Routes
